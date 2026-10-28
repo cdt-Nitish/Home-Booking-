@@ -1,5 +1,6 @@
 // Core Module
 const path = require('path');
+require("dotenv").config();
 
 // External Module
 const express = require('express');
@@ -22,8 +23,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-const DB_Path =
-  "mongodb://airbnb-1:neeraj15ab@ac-tomysuj-shard-00-00.txrf0w9.mongodb.net:27017,ac-tomysuj-shard-00-01.txrf0w9.mongodb.net:27017,ac-tomysuj-shard-00-02.txrf0w9.mongodb.net:27017/?ssl=true&replicaSet=atlas-12jxjk-shard-0&authSource=admin&appName=Cluster0";
+const DB_Path = process.env.Mongo_DB;
 
 const store = mongoDBStore({
   uri: DB_Path,
