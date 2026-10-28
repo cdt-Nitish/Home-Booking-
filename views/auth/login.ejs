@@ -1,0 +1,64 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <main class="auth-page">
+      <section class="auth-card" aria-labelledby="login-title">
+
+        <!-- Left: Visual panel -->
+        <div class="auth-intro">
+          <span class="auth-eyebrow">Welcome Back</span>
+          <h1 id="login-title">Find your<br/>perfect place.</h1>
+          <p>Sign in to continue your journey and discover unique stays around the world.</p>
+          <p class="auth-note">✦ Millions of hosts, one platform.</p>
+        </div>
+
+        <!-- Right: Form panel -->
+        <div class="auth-form-panel">
+          <div class="auth-logo-mark" aria-hidden="true">a</div>
+          <h2>Welcome back</h2>
+          <p>Enter your details to sign in to your account.</p>
+          
+
+          <form action="/login" method="POST" novalidate>
+            <div class="form-group">
+
+              <%- include('../partials/error') %>
+
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value= "<%= oldInput.email ? oldInput.email :'' %>"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full" style="margin-top:0.5rem">
+              Sign in &nbsp;→
+            </button>
+          </form>
+
+          <div class="auth-switch">
+            New to Airbnb? <a href="/signup">Create an account</a>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </body>
+</html>

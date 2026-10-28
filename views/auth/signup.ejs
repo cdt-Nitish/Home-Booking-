@@ -1,0 +1,191 @@
+
+<%- include('../partials/head') %>
+</head>
+
+<body>
+  <%- include('../partials/nav') %>
+
+  <main class="auth-page">
+    <section
+      class="auth-card"
+      aria-labelledby="signup-title"
+      style="grid-template-columns: 1fr 1.2fr; width: min(100%, 1040px);"
+    >
+      <!-- Left: Visual panel -->
+      <div class="auth-intro">
+        <span class="auth-eyebrow">Join Today</span>
+
+        <h1 id="signup-title">
+          Your next<br />
+          adventure<br />
+          awaits.
+        </h1>
+
+        <p>
+          Create your free account and start exploring thousands of unique
+          homes around the world.
+        </p>
+
+        <p class="auth-note">
+          ✦ No fees for guests to sign up.
+        </p>
+      </div>
+
+      <!-- Right: Form panel -->
+      <div
+        class="auth-form-panel"
+        style="overflow-y: auto; max-height: 90vh;"
+      >
+        <div class="auth-logo-mark" aria-hidden="true">a</div>
+
+        <h2>Create your account</h2>
+        <p>Fill in your details to get started in seconds.</p>
+
+        <!-- Validation Errors -->
+       <%- include('../partials/error') %>
+
+        <!-- Signup Form -->
+        <form action="/signup" method="POST" novalidate>
+          <!-- First and Last Name -->
+          <div
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;"
+          >
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input
+                id="firstName"
+                type="text"
+                name="firstName"
+                placeholder="Jane"
+                value="<%= oldInput?.firstName || '' %>"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input
+                id="lastName"
+                type="text"
+                name="lastName"
+                placeholder="Doe"
+                value="<%= oldInput?.lastName || '' %>"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              value="<%= oldInput?.email || '' %>"
+              required
+            />
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label for="reg-password">Password</label>
+            <input
+              id="reg-password"
+              type="password"
+              name="password"
+              placeholder="Create a strong password"
+              required
+            />
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input
+              id="confirm-password"
+              type="password"
+              name="confirmPassword"
+              placeholder="Repeat your password"
+              required
+            />
+          </div>
+
+          <!-- User Type -->
+          <div class="form-group">
+            <label>I am a&hellip;</label>
+
+            <div
+              class="radio-group"
+              role="group"
+              aria-label="User type"
+            >
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="userType"
+                  value="guest"
+                  <%= !oldInput?.userType || oldInput.userType === 'guest' ? 'checked' : '' %>
+                  required
+                />
+                <span>Guest</span>
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="userType"
+                  value="host"
+                  <%= oldInput?.userType === 'host' ? 'checked' : '' %>
+                  required
+                />
+                <span>Host</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Terms and Conditions -->
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                name="terms"
+                value="true"
+                required
+              />
+
+              <span>
+                I agree to the
+                <a
+                  href="#"
+                  style="color: var(--brand); font-weight: 600; text-decoration: none;"
+                >Terms &amp; Conditions</a>
+                and
+                <a
+                  href="#"
+                  style="color: var(--brand); font-weight: 600; text-decoration: none;"
+                >Privacy Policy</a>.
+              </span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-primary btn-full"
+          >
+            Create Account &nbsp;→
+          </button>
+        </form>
+
+        <!-- Login Link -->
+        <div class="auth-switch">
+          Already have an account?
+          <a href="/login">Sign in</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

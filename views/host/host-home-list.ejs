@@ -1,0 +1,69 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="page-wrapper">
+      <div class="container">
+
+        <div class="page-header">
+          <h1>🏠 My Listings</h1>
+          <p>Manage all your hosted properties</p>
+        </div>
+
+        <% if(registeredHomes && registeredHomes.length > 0) { %>
+          <div class="homes-grid">
+            <% registeredHomes.forEach(home => { %>
+              <article class="property-card">
+                <div class="property-card__image-wrap">
+                  <img
+                    src="<%= home.image %>"
+                    alt="<%= home.houseName %>"
+                    loading="lazy"
+                  
+                  />
+                  <span class="property-card__badge">Your Listing</span>
+                </div>
+                <div class="property-card__body">
+                  <h3 class="property-card__name"><%= home.houseName %></h3>
+                  <p class="property-card__location">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <%= home.location %>
+                  </p>
+                  <div class="property-card__meta">
+                    <div class="property-card__price">
+                      ₹<%= home.price %> <span>/ night</span>
+                    </div>
+                    <div class="property-card__rating">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      <%= home.rating %>
+                    </div>
+                  </div>
+                </div>
+                <div class="property-card__actions">
+                  <a href="/host/edit-home/<%= home._id %>?editing=true" class="btn btn-secondary" style="flex:1; text-align:center;">
+                    ✏️ Edit
+                  </a>
+                  <form action="/host/delete-home/<%= home._id %>" method="POST" style="margin:0;"
+                    onsubmit="return confirm('Are you sure you want to delete this listing?')">
+                    <button type="submit" class="btn btn-danger">
+                      🗑️
+                    </button>
+                  </form>
+                </div>
+              </article>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="empty-state">
+            <div class="empty-state__icon">🏡</div>
+            <h3>No listings yet</h3>
+            <p>Ready to host? Add your first property and start earning.</p>
+            <a href="/host/add-home" class="btn btn-primary">Add Your First Home</a>
+          </div>
+        <% } %>
+
+      </div>
+    </div>
+  </body>
+</html>
